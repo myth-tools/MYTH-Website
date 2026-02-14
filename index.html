@@ -49,8 +49,15 @@
                     controlling 672+ industrial tools. 100% Local. 0% Cloud. Pure Persistence.</p>
 
                 <div class="hero-actions reveal">
-                    <a href="javascript:void(0)" onclick="smartDownload()" class="btn btn-primary"
-                        id="smart-dl-btn">Download for <span id="detected-os">...</span></a>
+                    <div class="hero-actions reveal">
+                        <a href="javascript:void(0)" onclick="smartDownload()" class="btn btn-primary" id="smart-dl-btn"
+                            style="padding-left:20px; padding-right:24px;">
+                            <i id="dl-icon" data-lucide="download" style="margin-right:8px;"></i>
+                            <span>Download <span style="opacity:0.7">v1.1.0</span> for <span
+                                    id="detected-os">...</span></span>
+                        </a>
+                        <a href="#titan-viz" class="btn btn-outline" onclick="simulateMission()">Connect Local Agent</a>
+                    </div>
                     <a href="#titan-viz" class="btn btn-outline" onclick="simulateMission()">Connect Local Agent</a>
                 </div>
 
@@ -269,21 +276,30 @@
         // ---------------------------------------------------------
         // Smart OS Detection & Redirect Logic
         // ---------------------------------------------------------
+        // ---------------------------------------------------------
+        // Smart OS Detection & Redirect Logic
+        // ---------------------------------------------------------
         function detectOS() {
             const platform = window.navigator.platform.toLowerCase();
             const userAgent = window.navigator.userAgent.toLowerCase();
 
-            if (platform.indexOf('win') !== -1) return 'Windows';
-            if (platform.indexOf('mac') !== -1) return 'macOS';
-            if (platform.indexOf('linux') !== -1) return 'Linux';
-            if (platform.indexOf('freebsd') !== -1 || platform.indexOf('openbsd') !== -1) return 'BSD';
-            if (platform.indexOf('sunos') !== -1) return 'Solaris';
+            if (platform.indexOf('win') !== -1) return { name: 'Windows', icon: 'monitor' };
+            if (platform.indexOf('mac') !== -1) return { name: 'macOS', icon: 'apple' };
+            if (platform.indexOf('linux') !== -1) return { name: 'Linux', icon: 'terminal' };
+            if (platform.indexOf('freebsd') !== -1 || platform.indexOf('openbsd') !== -1) return { name: 'BSD', icon: 'server' };
+            if (platform.indexOf('sunos') !== -1) return { name: 'Solaris', icon: 'server' };
 
-            return 'Desktop'; // Fallback
+            return { name: 'Desktop', icon: 'download' }; // Fallback
         }
 
-        const currentOS = detectOS();
-        document.getElementById('detected-os').textContent = currentOS;
+        const osInfo = detectOS();
+        document.getElementById('detected-os').textContent = osInfo.name;
+
+        // Update Icon dynamically
+        const iconEl = document.getElementById('dl-icon');
+        if (iconEl) {
+            iconEl.setAttribute('data-lucide', osInfo.icon);
+        }
 
         function smartDownload() {
             // Map OS to specific download pages
@@ -296,7 +312,7 @@
                 'Desktop': 'download-other.html' // Default fallback
             };
 
-            const target = routes[currentOS] || 'download-windows.html';
+            const target = routes[osInfo.name] || 'download-windows.html';
             window.location.href = target;
         }
 
