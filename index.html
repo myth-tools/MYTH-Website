@@ -26,14 +26,27 @@
     <nav>
         <div class="container">
             <a href="#" class="logo">⌬ <span>MYTH</span></a>
-            <div class="hero-actions" style="margin-bottom:0; gap:30px;">
+            <div class="nav-links" style="display:flex; gap:30px; margin-bottom:0;">
                 <a href="#capabilities"
                     style="color:var(--text-dim); text-decoration:none; font-weight:600;">Capabilities</a>
                 <a href="#titan-viz" style="color:var(--text-dim); text-decoration:none; font-weight:600;">Dashboard</a>
                 <a href="#downloads" style="color:var(--text-dim); text-decoration:none; font-weight:600;">Downloads</a>
             </div>
-            <a href="#downloads" class="btn btn-primary" style="padding:12px 28px; font-size:0.9rem;">Deploy Agent <i
-                    data-lucide="zap" style="width:16px;"></i></a>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i data-lucide="menu"></i>
+            </button>
+            <div class="desktop-cta">
+                <a href="#downloads" class="btn btn-primary" style="padding:12px 28px; font-size:0.9rem;">Deploy Agent
+                    <i data-lucide="zap" style="width:16px;"></i></a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobile-menu">
+            <a href="#capabilities" class="mobile-link" onclick="toggleMobileMenu()">Capabilities</a>
+            <a href="#titan-viz" class="mobile-link" onclick="toggleMobileMenu()">Dashboard</a>
+            <a href="#downloads" class="mobile-link" onclick="toggleMobileMenu()">Downloads</a>
         </div>
     </nav>
 
@@ -273,6 +286,23 @@
         // ---------------------------------------------------------
         // Smart OS Detection & Redirect Logic
         // ---------------------------------------------------------
+        // ---------------------------------------------------------
+        // Mobile Menu Logic
+        // ---------------------------------------------------------
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btnIcon = document.querySelector('.mobile-menu-btn i');
+
+            menu.classList.toggle('active');
+
+            if (menu.classList.contains('active')) {
+                btnIcon.setAttribute('data-lucide', 'x');
+            } else {
+                btnIcon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        }
+
         // ---------------------------------------------------------
         // Smart OS Detection & Redirect Logic
         // ---------------------------------------------------------
