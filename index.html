@@ -49,7 +49,8 @@
                     controlling 672+ industrial tools. 100% Local. 0% Cloud. Pure Persistence.</p>
 
                 <div class="hero-actions reveal">
-                    <a href="#downloads" class="btn btn-primary">Download v1.1.0 Launcher</a>
+                    <a href="javascript:void(0)" onclick="smartDownload()" class="btn btn-primary"
+                        id="smart-dl-btn">Download for <span id="detected-os">...</span></a>
                     <a href="#titan-viz" class="btn btn-outline" onclick="simulateMission()">Connect Local Agent</a>
                 </div>
 
@@ -264,6 +265,40 @@
 
     <script>
         lucide.createIcons();
+
+        // ---------------------------------------------------------
+        // Smart OS Detection & Redirect Logic
+        // ---------------------------------------------------------
+        function detectOS() {
+            const platform = window.navigator.platform.toLowerCase();
+            const userAgent = window.navigator.userAgent.toLowerCase();
+
+            if (platform.indexOf('win') !== -1) return 'Windows';
+            if (platform.indexOf('mac') !== -1) return 'macOS';
+            if (platform.indexOf('linux') !== -1) return 'Linux';
+            if (platform.indexOf('freebsd') !== -1 || platform.indexOf('openbsd') !== -1) return 'BSD';
+            if (platform.indexOf('sunos') !== -1) return 'Solaris';
+
+            return 'Desktop'; // Fallback
+        }
+
+        const currentOS = detectOS();
+        document.getElementById('detected-os').textContent = currentOS;
+
+        function smartDownload() {
+            // Map OS to specific download pages
+            const routes = {
+                'Windows': 'download-windows.html',
+                'macOS': 'download-macos.html',
+                'Linux': 'download-linux.html',
+                'BSD': 'download-other.html',
+                'Solaris': 'download-other.html',
+                'Desktop': 'download-other.html' // Default fallback
+            };
+
+            const target = routes[currentOS] || 'download-windows.html';
+            window.location.href = target;
+        }
 
         // Reveal Animation Engine
         const observer = new IntersectionObserver((entries) => {
