@@ -1,10 +1,10 @@
-# ⌬ MYTH: The Sovereign AI Cybersecurity Agent
+# ⌬ {{NAME}}: The Sovereign AI Cybersecurity Agent
 
-![Version](https://img.shields.io/badge/Version-1.1.1-cyan?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-{{VERSION}}-cyan?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-Commercial-blueviolet?style=for-the-badge)
 ![Deployment](https://img.shields.io/badge/Deployment-43+%20Formats-brightgreen?style=for-the-badge)
 
-**MYTH** is an industry-grade autonomous AI agent for tactical cybersecurity operations. Orchestrating over **672+ tactical security tools**, MYTH provides a zero-knowledge, zero-dependency environment for security professionals to strike anywhere, on any architecture.
+**{{NAME}}** is an industry-grade autonomous AI agent for tactical cybersecurity operations. Orchestrating over **672+ tactical security tools**, {{NAME}} provides a zero-knowledge, zero-dependency environment for security professionals to strike anywhere, on any architecture.
 
 ---
 

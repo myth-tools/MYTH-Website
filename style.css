@@ -1,9 +1,9 @@
 :root {
-    --bg-color: #020204;
+    --bg-color: {{BRANDING_BACKGROUND}};
     --panel-color: rgba(13, 13, 20, 0.8);
-    --accent-primary: #00f2ff;
-    --accent-secondary: #7000ff;
-    --accent-success: #00ff88;
+    --accent-primary: {{BRANDING_PRIMARY}};
+    --accent-secondary: {{BRANDING_SECONDARY}};
+    --accent-success: {{BRANDING_ACCENT}};
     --accent-warning: #ffb800;
     --accent-danger: #ff3e3e;
     --text-main: #ffffff;
